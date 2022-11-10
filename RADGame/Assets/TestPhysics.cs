@@ -17,7 +17,7 @@ public class TestPhysics : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            ourRigidBody.AddExplosionForce(1000,transform.position+ Vector3.down+ Vector3.back,2);
+            ourRigidBody.AddExplosionForce(1000,transform.position+ Vector3.down+ 2* Vector3.back,3);
 
         }
      
@@ -25,6 +25,12 @@ public class TestPhysics : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        GameObject objectHit = collision.gameObject;
+        healthScript objectHitHealth = objectHit.GetComponent<healthScript>();
+        if (objectHitHealth)
+        {
+            objectHitHealth.takeDamage(20);
+        }
         print("Ouch");
     }
 
